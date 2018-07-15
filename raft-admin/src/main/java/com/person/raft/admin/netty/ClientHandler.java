@@ -1,9 +1,9 @@
 package com.person.raft.admin.netty;
 
+import java.net.InetAddress;
+
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-
-import java.net.InetAddress;
 
 /**
  * @author huangwenjun
@@ -13,12 +13,17 @@ public class ClientHandler extends SimpleChannelInboundHandler<String> {
     @Override
     public void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
         System.out.println("client msg:" + msg);
-        String clientIdToLong = ctx.channel().id().asLongText();
-        System.out.println("client long id:" + clientIdToLong);
-        String clientIdToShort = ctx.channel().id().asShortText();
-        System.out.println("client short id:" + clientIdToShort);
+        // String clientIdToLong = ctx.channel().id().asLongText();
+        // System.out.println("client long id:" + clientIdToLong);
+        // String clientIdToShort = ctx.channel().id().asShortText();
+        // System.out.println("client short id:" + clientIdToShort);
 
     }
+
+    // @Override
+    // public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+    // System.out.println("channelRead client msg:" + msg);
+    // }
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
@@ -26,7 +31,7 @@ public class ClientHandler extends SimpleChannelInboundHandler<String> {
         System.out.println("RamoteAddress : " + ctx.channel().remoteAddress() + " active !");
 
         ctx.channel().writeAndFlush(
-                "Welcome to " + InetAddress.getLocalHost().getHostName() + " service!\n");
+                "客户端的发送的消息:Welcome to " + InetAddress.getLocalHost().getHostName() + " service!\n");
 
         super.channelActive(ctx);
     }

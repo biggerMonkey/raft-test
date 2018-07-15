@@ -1,12 +1,9 @@
 package com.person.raft.server.netty;
 
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.SimpleChannelInboundHandler;
-
 import java.net.InetAddress;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.SimpleChannelInboundHandler;
 
 /**
  * @author huangwenjun
@@ -14,26 +11,34 @@ import org.slf4j.LoggerFactory;
  */
 public class ServerHandler extends SimpleChannelInboundHandler<String> {
 
-    private static final Logger log = LoggerFactory.getLogger(ServerHandler.class);
+    // private static final Logger log = LoggerFactory.getLogger(ServerHandler.class);
 
     @Override
     public void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
-        log.info("server msg:" + msg);
-        String clientIdToLong = ctx.channel().id().asLongText();
-        log.info("server long id:" + clientIdToLong);
-        String clientIdToShort = ctx.channel().id().asShortText();
-        log.info("server short id:" + clientIdToShort);
-        ctx.channel().writeAndFlush("Yoru msg is:" + msg);
+        System.out.println("msg:" + msg);
+        // log.info("server msg:" + msg);
+        // String clientIdToLong = ctx.channel().id().asLongText();
+        // log.info("server long id:" + clientIdToLong);
+        // String clientIdToShort = ctx.channel().id().asShortText();
+        // log.info("server short id:" + clientIdToShort);
+        ctx.writeAndFlush("Yoru msg is:" + msg + "\n");
 
     }
+
+    // @Override
+    // public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+    // System.out.println("channelRead msg:" + msg);
+    // ctx.writeAndFlush("Yoru msg is:" + msg);
+    //
+    // }
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
 
-        log.info("RamoteAddress : " + ctx.channel().remoteAddress() + " active !");
+        System.out.println("RamoteAddress : " + ctx.channel().remoteAddress() + " active !");
 
         ctx.channel().writeAndFlush(
-                "Welcome to " + InetAddress.getLocalHost().getHostName() + " service!\n");
+                "服务端的发送的消息:Welcome to " + InetAddress.getLocalHost().getHostName() + " service!\n");
 
         super.channelActive(ctx);
     }
@@ -47,7 +52,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<String> {
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-        log.info("\nChannel is disconnected");
+        System.out.println("\nChannel is disconnected");
         super.channelInactive(ctx);
     }
 }
