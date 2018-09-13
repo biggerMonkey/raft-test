@@ -1,9 +1,9 @@
 package com.person.raft.server.netty;
 
-import java.net.InetAddress;
-
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+
+import java.net.InetAddress;
 
 /**
  * @author huangwenjun
@@ -15,7 +15,8 @@ public class ServerHandler extends SimpleChannelInboundHandler<String> {
 
     @Override
     public void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
-        System.out.println("msg:" + msg);
+        System.out.println("接收到消息：msg:" + msg);
+        Thread.sleep(50000);
         // log.info("server msg:" + msg);
         // String clientIdToLong = ctx.channel().id().asLongText();
         // log.info("server long id:" + clientIdToLong);

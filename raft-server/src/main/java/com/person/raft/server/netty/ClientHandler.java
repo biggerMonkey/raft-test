@@ -1,9 +1,9 @@
-package com.person.raft.admin.netty;
+package com.person.raft.server.netty;
+
+import java.net.InetAddress;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-
-import java.net.InetAddress;
 
 /**
  * @author huangwenjun
@@ -40,13 +40,12 @@ public class ClientHandler extends SimpleChannelInboundHandler<String> {
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         cause.printStackTrace();
-        System.out.println("exceptionCaught");
         ctx.close();
     }
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("\nChannel is disconnected");
         super.channelInactive(ctx);
-        System.out.println("channelInactive");
     }
 }
