@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+
+	<!-- 属性设置 -->
+	<property name="appName" value="test" />
+
+	<!-- 应用名称 -->
+	<contextName>${appName}</contextName>
+
+	<!-- 控制台输出日志 appender类型：ConsoleAppender、FileAppender、RollingFileAppender -->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- encoder 默认配置为PatternLayoutEncoder example: 15:47:33 [main] INFO com.lixin.credit.logback.TestLog 
+			- === info -->
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}#-#%-5level#-#[traceId:%X{traceId}]#-#%msg%n</pattern>
+		</encoder>
+	</appender>
+
+<!--	<root level="INFO">-->
+<!--		<appender-ref ref="CustomAppender"/>-->
+<!--	</root>-->
+
+
+	<root level="INFO">
+		<appender-ref ref="STDOUT" />
+<!--		<appender-ref ref="CustomAppender"/>-->
+	</root>
+</configuration>

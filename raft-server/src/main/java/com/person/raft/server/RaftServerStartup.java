@@ -40,7 +40,8 @@ public class RaftServerStartup {
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
             ServerBootstrap b = new ServerBootstrap(); // (2)
-            b.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class) // (3)
+            b.group(bossGroup, workerGroup)
+                    .channel(NioServerSocketChannel.class) // (3)
                     .childHandler(new SimpleChatServerInitializer()) // (4)
                     .option(ChannelOption.SO_BACKLOG, 128) // (5)
                     .childOption(ChannelOption.SO_KEEPALIVE, true); // (6)

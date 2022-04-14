@@ -10,6 +10,9 @@ import java.net.InetAddress;
  * @Date 2018年7月12日
  */
 public class ClientHandler extends SimpleChannelInboundHandler<String> {
+
+    private ChannelHandlerContext ctx;
+
     @Override
     public void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
         System.out.println("client msg:" + msg);
@@ -29,6 +32,11 @@ public class ClientHandler extends SimpleChannelInboundHandler<String> {
                 "Welcome to " + InetAddress.getLocalHost().getHostName() + " service!\n");
 
         super.channelActive(ctx);
+        this.ctx = ctx;
+    }
+
+    public void sendMsg(String msg) {
+        this.ctx.channel().writeAndFlush(msg+"\n");
     }
 
 
